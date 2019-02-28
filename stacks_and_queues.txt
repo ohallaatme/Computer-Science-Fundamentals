@@ -1,0 +1,113 @@
+
+Short Answer
+
+1. 
+
+Q: What is the main difference between a stack and a queue?
+
+A: The main difference between a stack and a queue is that a stack handles the last item first (LIFO) whereas a queue handles the first item first (FIFO).
+
+2.
+
+Q: What are the similarities between stacks and queues?
+
+A: Both are lines for tasks to eventually be completed. Both are a way of ordering tasks within code.
+
+3.
+
+Q. Imagine you are an engineer tasked with implementing the UNDO and REDO options-which structure would you use for each and why?
+
+A: I would do the following:
+
+UNDO - I would use LIFO - I would want to remove the last thing I did in undo, so last in first out is most appropriate to perform an action on the last item.
+
+REDO - I would use FIFO because if I want to redo something I will start at the beginning with the first task.
+
+
+Programming Questions
+
+1. 
+
+a. Plan
+
+FUNCTION reverse string (string)
+	FOR each character in string
+		CALL stack.push WITH character
+	END FOR
+	WHILE stack not blank
+		CALL stack.pop RETURNING character
+		APPEND character to reversed
+	END WHILE
+	RETURN reversed
+       END FUNCTION
+
+
+
+b. Code
+
+```JavaScript
+
+function reverseString(str) {
+    var newString = "";
+    for (let i = str.length - 1; i>=0; i--) {
+        newString += str[i];
+    }
+    return newString;
+}
+
+```
+
+2.
+
+```JavaScript
+ class Stack {
+    constructor(){
+     this.pop = function(queue){
+       var newQueue = [];
+       var itemToRemove = [];
+       
+       for(var i=0;i<queue.length; i++){
+         if(i==queue.length-1){
+           itemToRemove.push(queue[i]);
+         }else{
+           newQueue.push(queue[i]);
+         }
+       }
+       
+       return itemToRemove;   
+       
+     }
+   }
+}
+
+
+3.
+
+```JavaScript
+class BothQueues {
+   constructor(){
+     this.elements = []
+   }
+  
+
+  enqueue(element)
+{    
+    this.elements.push(element);
+}
+
+
+  dequeue()
+{
+    if(this.isEmpty())
+        return "Empty";
+    return this.elements.shift();
+}
+  
+isEmpty()
+{
+    return this.elements.length ==0;
+}
+
+}
+
+```
