@@ -21,7 +21,7 @@ A: I would do the following:
 
 UNDO - I would use LIFO - I would want to remove the last thing I did in undo, so last in first out is most appropriate to perform an action on the last item.
 
-REDO - I would use FIFO because if I want to redo something I will start at the beginning with the first task.
+REDO - I would use LIFO because if I want to redo something I will start with the most recent item.
 
 
 Programming Questions
@@ -60,25 +60,28 @@ function reverseString(str) {
 2.
 
 ```JavaScript
- class Stack {
-    constructor(){
-     this.pop = function(queue){
-       var newQueue = [];
-       var itemToRemove = [];
-       
-       for(var i=0;i<queue.length; i++){
-         if(i==queue.length-1){
-           itemToRemove.push(queue[i]);
-         }else{
-           newQueue.push(queue[i]);
-         }
-       }
-       
-       return itemToRemove;   
-       
-     }
-   }
-}
+ function stack(queue) {
+	let first, last;
+
+	for(let i=0; I < queue.length; I++) {
+
+		if(i !== queue.length - 1) {
+			first = queue.shift();
+
+			queue.push(first);
+			console.log(queue);
+
+		}else {
+			last = queue.shift();
+			console.log(queue)
+
+		}
+	}
+
+	return last;
+
+
+	}
 
 
 3.
