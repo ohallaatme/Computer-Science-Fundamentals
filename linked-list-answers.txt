@@ -1,0 +1,125 @@
+
+Short Answers
+
+1.
+
+Q: What are some pros and cons of using linked lists instead of arrays?
+
+A: A big pro of linked lists is thatit can be used to increase and decrease the number of nodes (dynamic allocation). You can also use multiple types of data as elements within the linked lists. Also you do not have to shift subsequent elements with linked lists. The cons are that it takes up more memory than an array. It is not indexed like an array meaning you cannot reference it in that way.
+
+2.
+
+Q: give a real world example of a linked list.
+
+A: How I conceptualize a linked list is like a conga line. People are holding the hips of those in front of them. In order to get in line you need to find the right spot and decouple those two people and then insert yourself.
+
+
+Coding
+
+1. 
+
+Q: The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+A:
+
+The bug here is that the function does not have a loop to move from node to node in the list.
+
+
+2. 
+
+Q: Given an unsorted singly linked list, remove all duplicates from the linked list.
+
+```JavaScript
+
+//linked list creation
+
+function LinkedList(){
+  this.head = null;
+}
+
+LinkedList.prototype.push = function(val){
+	var node = {	
+		value: val,
+		next: null
+		}
+	if(!this.head){
+		this.head = node;
+	}
+	else{
+		current = this.head;
+		while(current.next){
+		  	current = current.next;
+		}
+		current.next = node
+		}
+	}
+
+var testll = new LinkedList();
+
+testll.push(2)
+testll.push(3)
+testll.push(2)
+testll.push(4)
+
+console.log(testll)
+
+
+//remove duplicates
+
+LinkedList.prototype.removeDuplicates = function () {
+    // Empty or a single element Linked List
+    if (!this.head || !this.head.next) {
+      return;
+    }
+
+    var p1;
+    var p2;
+    var nodes = {};
+
+    p1 = this.head;
+    p2 = p1.next;
+    nodes[p1.data] = true;
+
+    while (p2) {
+        var data = p2.data;
+        if (nodes[data]) {
+            p1.next = p2.next;
+        } else {
+            nodes[data] = true;
+            p1 = p2;
+        }
+        p2 = p2.next;
+    }
+};
+
+
+3.
+
+function reverseLinkedList(linkedlist){
+  if (!linkedlist || !linkedlist.head.next) return linkedlist;
+  let nodes = [].
+    current = linkedlist.head;
+  while(current){
+    nodes.push(current);
+    current = current.next;
+  }
+  let reversedLL = new LinkedList();
+
+  reversedLL.head = nodes.pop();
+  current = reversed::.head;
+
+  var node = nodes.pop();
+
+  while(node){
+    node.next = null;
+    current.next = node;
+
+    current = current.next;
+    node = nodes.pop();
+  }
+  return reversedLL;
+}
+
+//test
+
+reversedLinkedList(testll)
