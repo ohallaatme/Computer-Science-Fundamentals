@@ -29,97 +29,41 @@ The bug here is that the function does not have a loop to move from node to node
 
 Q: Given an unsorted singly linked list, remove all duplicates from the linked list.
 
-```JavaScript
-
-//linked list creation
-
-function LinkedList(){
-  this.head = null;
-}
-
-LinkedList.prototype.push = function(val){
-	var node = {	
-		value: val,
-		next: null
-		}
-	if(!this.head){
-		this.head = node;
-	}
-	else{
-		current = this.head;
-		while(current.next){
-		  	current = current.next;
-		}
-		current.next = node
-		}
-	}
-
-var testll = new LinkedList();
-
-testll.push(2)
-testll.push(3)
-testll.push(2)
-testll.push(4)
-
-console.log(testll)
-
-
-//remove duplicates
-
-LinkedList.prototype.removeDuplicates = function () {
-    // Empty or a single element Linked List
-    if (!this.head || !this.head.next) {
-      return;
-    }
-
-    var p1;
-    var p2;
-    var nodes = {};
-
-    p1 = this.head;
-    p2 = p1.next;
-    nodes[p1.data] = true;
-
-    while (p2) {
-        var data = p2.data;
-        if (nodes[data]) {
-            p1.next = p2.next;
-        } else {
-            nodes[data] = true;
-            p1 = p2;
+LinkedList.prototype.removeDuplicates = function(){
+    let current = this.head, arr = [], prev,next;
+    while(current.next !== null){
+        if (arr.indexOf(current.value) === -1){
+            arr.push(current.value);
+        }else{
+            if (prev){
+                prev.next = current.next;    
+            }                                            
         }
-        p2 = p2.next;
+        prev = current;
+        current  = current.next;                    
+    }
+    if (current.next == null){
+        if (arr.indexOf(current.value) != -1){
+            prev.next = null;
+        }
     }
 };
 
+3. Reverse a linked list
 
-3.
+function reverse(head) {
+  let node = head,
+      previous,
+      tmp;
 
-function reverseLinkedList(linkedlist){
-  if (!linkedlist || !linkedlist.head.next) return linkedlist;
-  let nodes = [].
-    current = linkedlist.head;
-  while(current){
-    nodes.push(current);
-    current = current.next;
+  while (node) {
+    tmp = node.next;
+    node.next = previous;
+    previous = node;
+    node = tmp;
   }
-  let reversedLL = new LinkedList();
 
-  reversedLL.head = nodes.pop();
-  current = reversed::.head;
-
-  var node = nodes.pop();
-
-  while(node){
-    node.next = null;
-    current.next = node;
-
-    current = current.next;
-    node = nodes.pop();
-  }
-  return reversedLL;
+  return previous;
 }
 
-//test
 
-reversedLinkedList(testll)
