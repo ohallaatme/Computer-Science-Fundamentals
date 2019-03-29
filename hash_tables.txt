@@ -1,0 +1,232 @@
+1.
+
+Q: What is a hash table?
+
+
+A: A hash table is a data structure in which each value is stored by linking it to a key, forming key value pairs that are similar to Javascript objects.
+
+
+2.
+
+Q: What is hashing?
+
+A: A process to convert string keys into numerical indices so we can utilize a hashing function to pull data out of our hash table with hash codes.
+
+3.
+
+Q: How does a hash table store data?
+
+A: By storing attributes grouped together with a primary key pair (tuples)
+
+
+
+4.
+
+Q: How are hash tables and objects different?
+
+A: They are very similar, but hash tables can handle cases in which a key corresponds with a native object and provides constant time lookup. 
+
+5.
+
+Q: Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+
+A list of pets and their unique names.
+
+A: Hash table
+
+The name, age, and the birthday of your best friend.
+
+A: Object
+The name and location of every company in a given city.
+
+A: Hash table
+
+All of the books checked out from a library by a particular individual.
+
+A: Hash table
+
+The primary and secondary phone numbers for a contact.
+
+A: Object
+
+// Programming
+
+1.
+
+Q: Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
+
+class Customer {
+	constructor(name, address, phoneNumber) {
+		this.name = name;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		}
+	}
+
+
+class HashTable{
+	constructor(storageLimit){
+		this.storage = [];
+		this.storageLimit = storageLimit;
+		}
+
+	hash(string) {
+		let hashCode = 0;
+		for (let i = 0; i < string.length; i++) {
+			hashCode += string.charCodeAt(i);
+			}
+		return hashCode % this.storageLimit;
+		}
+	
+	set(customer){
+		let index = this.hash(customer.phoneNumber);
+		if (this.storage[index] === undefined) {
+			this.storage[index] = customer;
+		} else {
+			throw new Error("Customer exists or there is a conflict");
+			}
+		}
+
+	get(customer) {
+		let index = this.hash(customer.phoneNumber);
+		if (this.storage[index]  === undefined) {
+			throw new Error ("Customer not found")
+		} else {
+			return this.storage[index];
+			}
+		}
+	}
+			
+//TEST
+
+let hashtable = new HashTable(10000);
+
+let customer1 = new Customer('Katie', '123 Marquette', '1234567897');
+
+hashtable.set(customer1);
+
+console.log(hashtable.get(customer1));			
+
+2.
+
+Q: Create a hash table that allows a store owner to track their store's inventory and quantity.
+
+A: class Inventory {
+	constructor(item, quantity) {
+		this.item = item;
+		this.quantity = quantity;
+		}
+	}
+
+
+class HashTable{
+	constructor(storageLimit){
+		this.storage = [];
+		this.storageLimit = storageLimit;
+		}
+
+	hash(string) {
+		let hashCode = 0;
+		for (let i = 0; i < string.length; i++) {
+			hashCode += string.charCodeAt(i);
+			}
+		return hashCode % this.storageLimit;
+		}
+	
+	set(inventory){
+		let index = this.hash(inventory.item);
+		if (this.storage[index] === undefined) {
+			this.storage[index] = inventory;
+		} else {
+			throw new Error("Inventory item exists or there is a conflict");
+			}
+		}
+
+	get(inventory) {
+		let index = this.hash(inventory.item);
+		if (this.storage[index]  === undefined) {
+			throw new Error ("inventory item was not found")
+		} else {
+			return this.storage[index];
+			}
+		}
+	}
+			
+//TEST
+
+let hashtable = new HashTable(10000);
+
+let item1 = new Inventory('Chocolate', 500);
+
+let item2 = new Inventory('Coffee Ground 1lb Bag', 200);
+
+hashtable.set(item1);
+
+hashtable.set(item2);
+
+console.log(hashtable.get(item1));			
+
+console.log(hashtable.get(item2));
+
+3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+
+A: class Newspaper {
+	constructor(publisher, publicationDate) {
+		this.publisher = publisher;
+		this.publicationDate = publicationDate;
+		}
+	}
+
+
+class HashTable{
+	constructor(storageLimit){
+		this.storage = [];
+		this.storageLimit = storageLimit;
+		}
+
+	hash(string) {
+		let hashCode = 0;
+		for (let i = 0; i < string.length; i++) {
+			hashCode += string.charCodeAt(i);
+			}
+		return hashCode % this.storageLimit;
+		}
+	
+	set(newspaper){
+		let index = this.hash(newspaper.publisher + newspaper.publicationDate);
+		if (this.storage[index] === undefined) {
+			this.storage[index] = newspaper;
+		} else {
+			throw new Error("Paper exists or there is a conflict");
+			}
+		}
+
+	get(newspaper) {
+		let index = this.hash(newspaper.publisher + newspaper.publicationDate);
+		if (this.storage[index]  === undefined) {
+			throw new Error ("inventory item was not found")
+		} else {
+			return this.storage[index];
+			}
+		}
+	}
+			
+//TEST
+
+let hashtable = new HashTable(10000);
+
+let paper1 = new Newspaper('KT', '4-11-1993');
+
+let paper2 = new Newspaper('Scooter', '1-11-2018')
+
+hashtable.set(paper1);
+
+hashtable.set(paper2);
+
+console.log(hashtable.get(paper1));			
+
+console.log(hashtable.get(paper2));
+
+
+
