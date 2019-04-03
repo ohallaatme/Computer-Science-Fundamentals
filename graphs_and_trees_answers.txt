@@ -1,0 +1,180 @@
+
+1.
+
+Q: What is a binary tree and what makes it unique to other trees?
+
+A: A binary tree is a data structure in which each node may point to a left child and a right child depending on what smaller or larger respectively. It differs from other trees because a general data structure tree has no node limit for children whereas a binary tree can only have two.
+
+2.
+
+Q: What is Heuristic?
+
+A: Heuristics are guesses an algorithm makes to solve a complex problem sooner by sacrificing some accuracy.
+
+
+3.
+
+Q: What is another problem besides the shortest path problem that requires the use of heuristics?
+
+A: Estimating the cost of a vacation depending on what time you choose to travel at.
+
+
+4.
+
+Q: What is the difference between a depth-first search and breadth-first search?
+
+A: Depth first search is where the search begins on a node and continues to go down through the children whereas breadth first search goes horizontally across the level of nodes before descending onto the next level of children.
+
+5. 
+
+Q: Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+A: It is a graph whereto edge connecting two nodes is ambiguous, the graph eventually ends (i.e. no loops), and no node is weighted as more costly or important than another node.
+
+6. 
+
+Q: What kind of graph is a binary search tree?
+
+A: a directed, a-cyclical, unweighted graph
+
+
+// Programming Questions
+
+
+1.
+
+Q: Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+A:
+
+//class for new binary search trees
+class BinarySearchTree {
+  constructor(val){
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+  //insert method to add noes and classify correctly
+  insert(value) {
+    let subtree = value < this.value ? 'left' : 'right';
+    if (this[subtree]) {
+      this[subtree].insert(value);
+    } else {
+      this[subtree] = new BinarySearchTree(value);
+    }
+  }
+
+  traverseBreadthFirst(func){
+    let queue = [this];
+
+    while (queue.length) {
+      let currentNode = queue.shift();
+
+      if (currentNode.left) {
+        queue.push(currentNode.left)
+      }
+
+      if (currentNode.right) {
+        queue.push(currentNode.right)
+      }
+
+      func(currentNode.value)
+    }
+  } ;
+};
+
+//add new tree
+var myNewTree = new BinarySearchTree(20)
+console.log(myNewTree);
+//insert
+myNewTree.insert(25)
+console.log(myNewTree);
+myNewTree.insert(11)
+console.log(myNewTree);
+
+//function to find node if it is equal
+
+BinarySearchTree.prototype.contains = function (value) {
+  let doesContain = false;
+  function recurse(bst) {
+    if (bst.value === value) {
+      doesContain = true;;
+    } else if (bst.left !== null && value < bst.value) {
+      recurse(bst.left);
+    } else if (bst.right !== null && value > bst.value) {
+      recurse(bst.right)
+    } 
+    
+  }
+  recurse(this);
+  return doesContain;
+}
+
+myNewTree.contains(20);
+myNewTree.contains(4);
+
+
+2.
+
+Q: Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+A:
+
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+
+  LCA(root, n1, n2) {
+    //base case
+    if(root === null){
+      return null;
+    } 
+    if (root.data === n1 || root.data == n2) {
+      return root;
+  } 
+  if (left !== null && right !== null) {
+    return root
+  }
+  if (left) {
+    return left
+  } else {
+    return right;
+  }
+}
+findLevel(root, data, d, level) {
+  if (root === null) {
+    return
+  }
+  if(root.data == data){
+    d.append(level);
+    return
+  }
+}
+
+findDistance(root, n1, n2){
+  let lca = LCA(root, n1, n2)
+  // store distance of n1 from lca
+  let d1 = []
+  // store distance of n2 from lca
+  let d2 = []
+
+  if(lca){
+    findLevel(lca, n1, d1, 0);
+    findLevel(lca, n2, d2, 0);
+    return d1[0] + d2[0];
+  } else {
+    return -1;
+  }
+}
+
+}
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+}
+			
